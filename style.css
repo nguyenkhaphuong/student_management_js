@@ -1,0 +1,92 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: sans-serif;
+}
+
+h2 {
+  margin: 1rem 0;
+  font-size: 2rem;
+  color: red;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+}
+
+input {
+  display: block;
+  padding: 1rem 0.2rem;
+  margin: 0.4rem 0;
+  width: 100%;
+}
+
+button {
+  padding: 0.6rem 0.2rem;
+  margin: 0.4rem 0;
+  width: 25rem;
+  border: none;
+  border-radius: 1.6rem;
+  color: white;
+  font-size: 1.2rem;
+}
+
+.add-button {
+  background-color: green;
+}
+
+.delete-button {
+  background-color: orangered;
+}
+
+.add-button:hover {
+  background-color: rgb(0, 175, 0);
+  cursor: pointer;
+  transition: 0.4s;
+}
+
+.delete-button:hover {
+  background-color: rgb(255, 106, 52);
+  cursor: pointer;
+  transition: 0.4s;
+}
+
+table {
+  margin: 1rem 0;
+  border: 1px solid black;
+  width: 52rem;
+}
+
+th,
+td {
+  padding: 0.6rem 0.2rem;
+  width: 12rem;
+  text-align: center;
+}
+
+.edit-button {
+  background-color: green;
+  width: 10rem;
+}
+
+.delete-student {
+  background-color: orangered;
+  width: 10rem;
+}
+
+.edit-button:hover {
+  background-color: rgb(0, 175, 0);
+  cursor: pointer;
+  transition: 0.4s;
+}
+
+.delete-student:hover {
+  background-color: rgb(255, 106, 52);
+  cursor: pointer;
+  transition: 0.4s;
+}
