@@ -8,6 +8,7 @@ const getStudentInfo = () => {
     const chemistry = parseFloat(
       document.getElementById('chemistryGrade').value
     )
+    const english = parseFloat(document.getElementById('englishGrade').value)
 
     if (
       studentId === '' ||
@@ -15,15 +16,22 @@ const getStudentInfo = () => {
       email === '' ||
       math === '' ||
       physics === '' ||
-      chemistry === ''
+      chemistry === '' ||
+      english === ''
     ) {
       alert('Please enter all required fields')
       return undefined
     }
 
-    if (isNaN(studentId) || isNaN(math) || isNaN(physics) || isNaN(chemistry)) {
+    if (
+      isNaN(studentId) ||
+      isNaN(math) ||
+      isNaN(physics) ||
+      isNaN(chemistry) ||
+      isNaN(english)
+    ) {
       alert(
-        'Please enter a valid number for Student Id, Math, Physics and/or Chemistry grades'
+        'Please enter a valid number for Student Id, Math, Physics, Chemistry and/or English grades'
       )
       return false
     }
@@ -43,13 +51,19 @@ const getStudentInfo = () => {
       return false
     }
 
+    if (english < 0 || english > 10) {
+      alert('English grade must be between 0 and 10.')
+      return false
+    }
+
     const newStudent = new Student(
       studentId,
       name,
       email,
       math,
       physics,
-      chemistry
+      chemistry,
+      english
     )
 
     renderStudents(newStudent)
@@ -69,8 +83,9 @@ const renderStudents = (students) => {
     const averageGrade = (
       (Number(currentStudent.math) +
         Number(currentStudent.physics) +
-        Number(currentStudent.chemistry)) /
-      (3 !== 0 ? 3 : 1)
+        Number(currentStudent.chemistry) +
+        Number(currentStudent.english)) /
+      (4 !== 0 ? 4 : 1)
     ).toFixed(2)
 
     const contentTr = `
