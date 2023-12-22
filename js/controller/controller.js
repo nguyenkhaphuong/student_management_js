@@ -1,42 +1,92 @@
 const getStudentInfo = () => {
-  let studentId = document.getElementById("student-id").value;
-  let name = document.getElementById("name").value;
-  let email = document.getElementById("email").value;
-  let math = document.getElementById("math").value;
-  let physic = document.getElementById("physic").value;
-  let chemical = document.getElementById("chemical").value;
-  let newStudent = new Student(studentId, name, email, math, physic, chemical)
+  try {
+    const studentId = parseInt(document.getElementById('studentId').value)
+    const name = document.getElementById('studentName').value
+    const email = document.getElementById('studentEmail').value
+    const math = parseFloat(document.getElementById('mathGrade').value)
+    const physics = parseFloat(document.getElementById('physicsGrade').value)
+    const chemistry = parseFloat(
+      document.getElementById('chemistryGrade').value
+    )
 
-  return newStudent;
+    if (
+      studentId === '' ||
+      name === '' ||
+      email === '' ||
+      math === '' ||
+      physics === '' ||
+      chemistry === ''
+    ) {
+      alert('Please enter all required fields')
+      return undefined
+    }
+
+    if (isNaN(studentId) || isNaN(math) || isNaN(physics) || isNaN(chemistry)) {
+      alert(
+        'Please enter a valid number for Student Id, Math, Physics and/or Chemistry grades'
+      )
+      return false
+    }
+
+    if (math < 0 || math > 10) {
+      alert('Math grade must be between 0 and 10.')
+      return false
+    }
+
+    if (physics < 0 || physics > 10) {
+      alert('Physics grade must be between 0 and 10.')
+      return false
+    }
+
+    if (chemistry < 0 || chemistry > 10) {
+      alert('Chemistry grade must be between 0 and 10.')
+      return false
+    }
+
+    const newStudent = new Student(
+      studentId,
+      name,
+      email,
+      math,
+      physics,
+      chemistry
+    )
+
+    renderStudents(newStudent)
+
+    return newStudent
+  } catch (error) {
+    console.log('Error', error)
+  }
 }
 
 const renderStudents = (students) => {
-  let contentHTML = "";
+  let contentHTML = ''
+  const table = document.getElementById('student-table-body')
+
   for (let i = 0; i < students.length; i++) {
-    let currentStudent = students[i];
-    let contentTr = `
-      <tr>
-        <td>${currentStudent.id}</td>
-        <td>${currentStudent.name}</td>
-        <td>${currentStudent.email}</td>
-        <td>${(currentStudent.math * 1 + currentStudent.physic * 1 + currentStudent.chemical * 1) / 3}</td>
-        <td>
-          <button id="edit-btn">Edit</button>
-          <button id="delete-btn">Delete</button>
-        </td>
-      </tr>
-    `;
+    const currentStudent = students[i]
+    const averageGrade = (
+      (Number(currentStudent.math) +
+        Number(currentStudent.physics) +
+        Number(currentStudent.chemistry)) /
+      (3 !== 0 ? 3 : 1)
+    ).toFixed(2)
+
+    const contentTr = `
+    <tr>
+      <td>${currentStudent.id}</td>
+      <td>${currentStudent.name}</td>
+      <td>${currentStudent.email}</td>
+      <td>${Math.round(averageGrade * 2) / 2}</td>
+      <td>
+        <button id="edit-button" class="edit-button" type="button" onclick="editStudent()">Edit</button>
+        <button id="delete-student" class="delete-student" type="button" onclick="deleteStudent()">Delete</button>
+      </td>
+    </tr>
+    `
     contentHTML += contentTr
   }
-  document.getElementById("table-body").innerHTML = contentHTML;
-}
 
-const setLocalStudents = (students) => {
-  let jsonStudents = JSON.stringify(students);
-  localStorage.setItem(STUDENT_LOCAL_STORAGE, jsonStudents)
-}
-
-let getLocalStudents = () => {
-  let jsonStudents = localStorage.getItem(STUDENT_LOCAL_STORAGE);
-  return JSON.parse(jsonStudents)
+  table.innerHTML = contentHTML
 }
