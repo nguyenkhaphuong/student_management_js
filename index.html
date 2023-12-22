@@ -1,61 +1,42 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-
-  <style>
-    th, td {
-      padding: 20px;
-    }
-  </style>
-</head>
-
-<body>
-  <div>
-    <h1>Quan ly sinh vien</h1>
-    <div>
-      <form action="" id="form-control-student">
-        <label for="">Ma sinh vien:</label>
-        <input type="text" id="student-id">
-        <br>
-        <label for="">Ten sinh vien:</label>
-        <input type="text" id="name">
-        <br>
-        <label for="">Email sinh vien:</label>
-        <input type="text" id="email">
-        <br>
-        <label for="">Diem toan:</label>
-        <input type="text" id="math">
-        <br>
-        <label for="">Diem ly:</label>
-        <input type="text" id="physic">
-        <br>
-        <label for="">Diem hoa:</label>
-        <input type="text" id="chemical">
-        <br>
-        <button onclick="addNewStudent()">Them sinh vien</button>
-        <button onclick="resetStudents()">Xoa danh sach sinh vien</button>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <title>Quan Ly Sinh Vien</title>
+  </head>
+  <body>
+    <div class="container">
+      <h2>Student Management</h2>
+      <form class="student-form" id="student-form">
+        <input type="text" id="studentId" placeholder="Student ID" />
+        <input type="text" id="studentName" placeholder="Student Name" />
+        <input type="email" id="studentEmail" placeholder="Student Email" />
+        <input type="text" id="mathGrade" placeholder="Math Grade" />
+        <input type="text" id="physicsGrade" placeholder="Physics Grade" />
+        <input type="text" id="chemistryGrade" placeholder="Chemistry Grade" />
+        <button class="add-button" type="button" onclick="addNewStudent()">
+          Add Student
+        </button>
+        <button class="delete-button" type="button" onclick="deleteList()">
+          Delete List
+        </button>
       </form>
-
-      <table style="width: 600px; border-collapse: collapse;" border="1">
+      <table border="1" id="student-table">
         <thead>
-          <th>Ma Sinh Vien</th>
-          <th>Ten</th>
-          <th>Email</th>
-          <th>Diem trung binh</th>
-          <th>Thao tac</th>
+          <th>Student ID</th>
+          <th>Student Name</th>
+          <th>Student Email</th>
+          <th>Average Grade</th>
+          <th>Actions</th>
         </thead>
-        <tbody id="table-body"></tbody>
+        <tbody id="student-table-body"></tbody>
       </table>
     </div>
-  </div>
 
-  <script src="./js/model/model.js"></script>
-  <script src="./js/controller/controller.js"></script>
-  <script src="./js/main.js"></script>
-</body>
-
+    <script src="./js/model/Student.js"></script>
+    <script src="./js/controller/controller.js"></script>
+    <script src="./js/main.js"></script>
+  </body>
 </html>
