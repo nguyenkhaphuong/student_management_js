@@ -1,3 +1,5 @@
+const students = require('../main')
+
 const getStudentInfo = () => {
   try {
     const studentId = parseInt(document.getElementById('studentId').value)
@@ -90,7 +92,7 @@ const renderStudents = (students) => {
 
     const contentTr = `
     <tr>
-      <td>${currentStudent.id}</td>
+      <td id='student-id'>${currentStudent.id}</td>
       <td>${currentStudent.name}</td>
       <td>${currentStudent.email}</td>
       <td>${Math.round(averageGrade * 2) / 2}</td>
@@ -104,4 +106,18 @@ const renderStudents = (students) => {
   }
 
   table.innerHTML = contentHTML
+}
+
+const deleteStudent = () => {
+  const id = document.getElementById('student-id').parentNode.nodeName
+
+  if (id === 'tr') {
+    const studentId = document.getElementById('student-id').textContent
+
+    students = students.filter((student) => student.id !== studentId)
+
+    const row = document.getElementById('student-id').parentNode
+
+    row.removeChild()
+  }
 }
